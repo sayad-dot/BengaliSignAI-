@@ -1,14 +1,9 @@
-# ——————————————————————————
-# Root .gitignore for BengaliSignAI
-# ——————————————————————————
-
 # 1) Python virtual environment and bytecode
 venv/
 __pycache__/
 *.py[cod]
 
 # 2) Dataset & processed data
-# (ignore large/raw video files and processed .npy files)
 data/raw/
 data/processed/
 
@@ -20,19 +15,17 @@ frontend/target/
 frontend/.idea/
 frontend/*.iml
 
-# 5) IDE/editor folders
+# 5) IntelliJ IDEA project/output folders
 .idea/
 *.iml
+out/
+lib/
+
+# 6) VS Code
 .vscode/
 
-# 6) macOS metadata
+# 7) macOS metadata
 .DS_Store
-
-# 7) Optional: Maven wrapper
-# (Uncomment if you want to remove wrapper files from Git)
-frontend/.mvn/
-frontend/mvnw
-frontend/mvnw.cmd
 
 # 8) Miscellaneous logs/temp
 *.log
