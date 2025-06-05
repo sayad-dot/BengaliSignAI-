@@ -1,0 +1,15 @@
+# Ignore Python venvs and caches
+python_backend/**/venv/
+python_backend/**/__pycache__/
+python_backend/**/*.pyc
+
+# Ignore data folder (since dataset is large)
+data/
+
+# Ignore Java build outputs
+java_frontend/target/
+java_frontend/.idea/
+java_frontend/*.iml
+
+# OS artifacts
+.DS_Store
