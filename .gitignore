@@ -13,3 +13,18 @@ java_frontend/*.iml
 
 # OS artifacts
 .DS_Store
+
+# Ignore raw and processed data
+data/raw/
+data/processed/
+
+# Ignore models folder
+models/
+
+# Ignore virtual environment
+venv/
+
+# Byte‐compiled Python files
+__pycache__/
+*.pyc
+
