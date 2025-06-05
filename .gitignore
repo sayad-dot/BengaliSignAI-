@@ -10,6 +10,8 @@ data/processed/
 # 3) Trained model artifacts
 models/
 
+# … other rules …
+
 # 4) Java (Maven) frontend build outputs and IDE files
 frontend/target/
 frontend/.idea/
@@ -29,3 +31,5 @@ lib/
 
 # 8) Miscellaneous logs/temp
 *.log
+
+# → DO NOT ignore frontend/.mvn, mvnw, or mvnw.cmd
