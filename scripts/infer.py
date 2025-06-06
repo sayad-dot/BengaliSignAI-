@@ -5,7 +5,7 @@ import argparse
 import torch
 import numpy as np
 import cv2
-from src.python.model import Simple3DCNN
+from src.backend.model import Simple3DCNN
 
 def preprocess_video_for_inference(video_path, target_frames=16, target_size=(224, 224)):
     frames = []

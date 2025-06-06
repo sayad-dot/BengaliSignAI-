@@ -5,8 +5,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import random_split, DataLoader
-from src.python.dataset import SignDataset
-from src.python.model import Simple3DCNN
+from src.backend.dataset import SignDataset
+from src.backend.model import Simple3DCNN
 from tqdm import tqdm
 
 PROCESSED_DIR = "../data/processed"
@@ -33,8 +33,9 @@ def train():
     train_size = total_samples - val_size
     train_ds, val_ds = random_split(full_dataset, [train_size, val_size])
 
-    train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
-    val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
+    train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True, num_workers=0)
+    val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False, num_workers=0)
+
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = Simple3DCNN(num_classes).to(device)

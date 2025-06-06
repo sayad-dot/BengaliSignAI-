@@ -1,16 +1,13 @@
-# scripts/data_preprocess.py
-
 import os
 import cv2
 import numpy as np
 from tqdm import tqdm
 
-# Adjust these paths if you named your folders differently:
-RAW_DATA_DIR = "../data/raw/SignBD-Word"
+RAW_DATA_DIR = "../data/raw/BdSLW60"
 PROC_DATA_DIR = "../data/processed"
 
-TARGET_FRAMES = 16       # number of frames per clip
-TARGET_SIZE = (224, 224) # height x width
+TARGET_FRAMES = 16
+TARGET_SIZE = (224, 224)  # (width, height)
 
 def preprocess_video(video_path, save_dir, class_name, sample_idx):
     cap = cv2.VideoCapture(video_path)
@@ -23,7 +20,6 @@ def preprocess_video(video_path, save_dir, class_name, sample_idx):
         success, frame = cap.read()
     cap.release()
 
-    # Pad or sample frames to reach TARGET_FRAMES
     if len(frames) < TARGET_FRAMES:
         while len(frames) < TARGET_FRAMES:
             frames.append(frames[-1].copy())
@@ -31,11 +27,13 @@ def preprocess_video(video_path, save_dir, class_name, sample_idx):
         idxs = np.linspace(0, len(frames) - 1, TARGET_FRAMES, dtype=int)
         frames = [frames[i] for i in idxs]
 
-    video_arr = np.stack(frames, axis=0).astype(np.float32) / 255.0  # (T, H, W, 3)
+    video_arr = np.stack(frames, axis=0).astype(np.float32) / 255.0  # shape (T, H, W, 3)
 
     os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, f"{class_name}__{sample_idx}.npy")
     np.save(save_path, video_arr)
+
+
 
 def main():
     os.makedirs(PROC_DATA_DIR, exist_ok=True)
@@ -54,6 +52,8 @@ def main():
         for idx, vid in enumerate(tqdm(video_files, desc=f"Processing {class_name}")):
             video_path = os.path.join(class_folder, vid)
             preprocess_video(video_path, out_class_folder, class_name, idx)
+
+
 
 if __name__ == "__main__":
     main()
